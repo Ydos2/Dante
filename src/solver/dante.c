@@ -8,7 +8,10 @@
 #include "dante.h"
 #include "libmy.h"
 
-int start_dante(int ac, char **av)
+int start_dante(char **av)
 {
-    return (84);
+    char *map = my_parsing(av[1]);
+
+    puts(map);
+    return (0);
 }

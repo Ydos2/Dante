@@ -12,6 +12,9 @@
 void draw_help(void);
 
 // dante.c
-int start_dante(int ac, char **av);
+int start_dante(char **av);
+
+// parsing.c
+char *my_parsing(char *filepath);
 
 #endif /* !dante_H */

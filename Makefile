@@ -14,8 +14,9 @@ LIB	=	lib/transform_character.c	\
 		lib/my_putarray.c	\
 		lib/my_strcpy.c
 
-SRC	=	src/help_page.c	\
-		src/dante.c
+SRC	=	src/solver/help_page.c	\
+		src/solver/dante.c		\
+		src/solver/parsing.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -28,13 +29,13 @@ COVERAGE	=	$(MAIN_SRC:.c=.gcda)	\
 				$(SRC:.c=.gcda)	\
 				$(SRC:.c=.gcno)
 
-MAIN_SRC	=	src/main.c
+MAIN_SRC	=	src/solver/main.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
 CFLAGS	=	-I./include -Wextra -W -Wall -pedantic
 
-TARGET	=	navy
+TARGET	=	solver
 
 TEST_SRC	=	tests/initisation.c
 
