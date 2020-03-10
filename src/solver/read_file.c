@@ -7,6 +7,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include "dante.h"
+#include "libmy.h"
 
 char **stock_line_in_array(char **last_stock, char *line, int line_size)
 {
@@ -46,16 +48,12 @@ char **read_from_stream(FILE *stream)
 
 char **read_file(char *path)
 {
-    char *buffer = NULL;
     char **map = NULL;
     FILE *stream;
-    int lines = 0;
 
     stream = fopen(path, "r");
-    if (stream == NULL) {
-        my_put_error("File couldn't be opened\n");
+    if (stream == NULL)
         return (NULL);
-    }
     map = read_from_stream(stream);
     fclose(stream);
     return (map);

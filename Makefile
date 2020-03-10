@@ -16,7 +16,8 @@ LIB	=	lib/transform_character.c	\
 
 SRC	=	src/solver/help_page.c	\
 		src/solver/dante.c		\
-		src/solver/parsing.c
+		src/solver/read_file.c	\
+		src/solver/initialise.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -83,7 +84,7 @@ re_tests: fclean tests_run ## Clean then tests
 
 valgrind:	CFLAGS += -g3
 valgrind:	fclean	all ## Launch valgrind
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET)
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET) maps/map1
 
 help: ## Help for the Makefile
 	@cat $(MAKEFILE_LIST) | sed -En 's/^([a-zA-Z_-]+)\s*:.*##\s?(.*)/\1 "\2"/p' | xargs printf "\033[32m%-30s\033[0m %s\n"
