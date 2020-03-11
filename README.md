@@ -1,8 +1,8 @@
- # PSU_navy_2019
+ # PSU_dante_2019
 
 ## General informations
-Name : my_dante<br />
-Author : Mathias Ressort<br />Alexandre Descoi
+Name : dante<br />
+Author : Mathias Ressort<br />Alexandre Descoin
 
 ## Requirement Package
 * C

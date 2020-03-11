@@ -27,6 +27,8 @@ COVERAGE	=	$(MAIN_SRC:.c=.gcda)	\
 				$(MAIN_SRC:.c=.gcno)	\
 				$(TEST_SRC:.c=.gcda)	\
 				$(TEST_SRC:.c=.gcno)	\
+				$(LIB:.c=.gcda)	\
+				$(LIB:.c=.gcno)	\
 				$(SRC:.c=.gcda)	\
 				$(SRC:.c=.gcno)
 
@@ -38,7 +40,8 @@ CFLAGS	=	-I./include -Wextra -W -Wall -pedantic
 
 TARGET	=	solver
 
-TEST_SRC	=	tests/initisation.c
+TEST_SRC	=	tests/initialisation.c	\
+				tests/tests_lib.c
 
 TEST_OBJ	=	$(TEST_SRC:.c=.o)
 

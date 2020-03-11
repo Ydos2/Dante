@@ -13,9 +13,11 @@
 
 void draw_path(struc_t *struc, int entry)
 {
-    if (entry == 1)
-        struc->map[struc->y][struc->x+1] = '*';
-    else
+    if (entry == 1) {
+        if (struc->map[struc->y][struc->x+struc->factor] == 'o') {
+            struc->map[struc->y][struc->x+struc->factor] = '*';
+        }
+    } else if (struc->map[struc->y][struc->x] == '*')
         struc->map[struc->y][struc->x] = 'o';
 }
 
@@ -31,19 +33,19 @@ int analyse(struc_t *struc, int x, int y)
 int action_path(struc_t *struc, int x, int y, int entry)
 {
     if (analyse(struc, x+1, y) == 1 && entry == 0) {
-        struc->x++;
+        struc->x += 1;
         return (1);
     }
     if (analyse(struc, x, y+1) == 1) {
-        struc->y++;
+        struc->y += 1;
         return (1);
     }
     if (analyse(struc, x, y-1) == 1) {
-        struc->y--;
+        struc->y -= 1;
         return (1);
     }
     if (analyse(struc, x-1, y) == 1) {
-        struc->x--;
+        struc->x -= 1;
         return (1);
     }
     return (0);
@@ -64,11 +66,12 @@ char **ai_brain(struc_t *struc, int entry)
 
 int start_dante(char **av)
 {
-    char **map = read_file(av[1]);
+    char **map = NULL;
     struc_t *struc = NULL;
 
-    if (map == NULL)
+    if (av == NULL)
         return (84);
+    map = read_file(av[1]);
     struc = initialise_arg(struc, map);
     map = ai_brain(struc, 0);
     for (int y = 0; map[y] != NULL; y++)

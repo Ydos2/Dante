@@ -17,6 +17,9 @@ typedef struct struc
     int y_max;
     int x;
     int y;
+    int factor;
+    int factor_x;
+    int factor_y;
     char **map;
 } struc_t;
 

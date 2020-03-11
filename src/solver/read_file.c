@@ -51,6 +51,8 @@ char **read_file(char *path)
     char **map = NULL;
     FILE *stream;
 
+    if (path == NULL)
+        return (NULL);
     stream = fopen(path, "r");
     if (stream == NULL)
         return (NULL);
