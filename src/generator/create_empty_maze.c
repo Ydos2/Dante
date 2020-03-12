@@ -18,11 +18,13 @@ char **create_empty_maze(int x, int y)
         return (NULL);
     for (; i != y + 1; i++) {
         j = 0;
-        maze[i] = malloc(sizeof(char) * (x + 1));
-        for (; j != x + 1; j++)
-            maze[i][j] = 'x';
-        maze[i][j] = i != j ? '\n' : '\0';
+        maze[i] = malloc(sizeof(char) * (x + 2));
+        for (; j != x; j++)
+            maze[i][j] = 'X';
+        maze[i][j] = '\0';
     }
     maze[y] = NULL;
+    maze[0][0] = '*';
+    maze[y - 1][x - 1] = '*';
     return (maze);
 }

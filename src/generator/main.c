@@ -5,15 +5,17 @@
 ** main
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "generator.h"
 
 int print_help(int ret)
 {
-    printf("./generator x y [perfect]\n\n");
+    printf("\n./generator x y [perfect]\n\n");
     printf("x: width of the maze (must be > 0)\n");
     printf("y: heigh of the maze (must be > 0)\n");
-    printf("[Perfect]: should the maze be perfect ?\n");
+    printf("[Perfect]: should the maze be perfect ?\n\n");
     return (ret);
 }
 
