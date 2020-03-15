@@ -52,7 +52,7 @@ TEST_LFLAGS	=	-lcriterion
 all:	$(TARGET) ## Build the project
 
 $(TARGET):	build
-	@make --silent -C src/generator build 
+	@make -C src/generator build 
 
 build:	$(OBJ)	$(MAIN_OBJ)	$(LIB_OBJ)	## Compile the project
 	@printf "\e[1;3;5;32m▀▄▀▄▀▄ Finished compiling sources ▄▀▄▀▄▀\e[0m\n"
