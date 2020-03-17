@@ -7,11 +7,10 @@
 
 CC	=	gcc
 
-SRC	=	create_empty_maze.c	\
-		create_wandering_path.c		\
-		perfect/add_perfect_path.c \
-		perfect/generate_perfect_maze.c \
-		imperfect/generate_imperfect_maze.c
+SRC	=	dante.c	\
+		help_page.c		\
+		initialise.c \
+		read_file.c \
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -26,9 +25,9 @@ MAIN_SRC	=	main.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
-CFLAGS	=	-I../../include -Wextra -W -Wall -pedantic
+CFLAGS	=	-I../include -Wextra -W -Wall -pedantic
 
-TARGET	=	generator
+TARGET	=	solver
 
 TEST_SRC	=	tests/initisation.c
 
@@ -47,7 +46,6 @@ build:	$(OBJ)	$(MAIN_OBJ) ## Compile the project
 	@$(CC) $(CFLAGS) $(OBJ) $(MAIN_OBJ) -o $(TARGET)
 	@printf "[\e[1;34m-Link Obj-\e[0m] % 43s\n" $(OBJ) | tr ' ' '.'
 	@printf "[\e[1;34m-Link Main-\e[0m] % 43s\n" $(MAIN_OBJ) | tr ' ' '.'
-	@mv $(TARGET) ../../
 	@printf "\e[1;3;5;32m▀▄▀▄▀▄ Link all object ▄▀▄▀▄▀\e[0m\n"
 
 %.o:	%.c

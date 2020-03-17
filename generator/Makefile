@@ -7,39 +7,30 @@
 
 CC	=	gcc
 
-LIB	=	lib/transform_character.c	\
-		lib/tools_function.c	\
-		lib/get_next_line.c	\
-		lib/str_to_array.c	\
-		lib/my_putarray.c	\
-		lib/my_strcpy.c
-
-SRC	=	src/solver/help_page.c	\
-		src/solver/dante.c		\
-		src/solver/read_file.c	\
-		src/solver/initialise.c
+SRC	=	create_empty_maze.c	\
+		create_wandering_path.c		\
+		perfect/add_perfect_path.c \
+		perfect/generate_perfect_maze.c \
+		imperfect/generate_imperfect_maze.c
 
 OBJ	=	$(SRC:.c=.o)
-
-LIB_OBJ	=	$(LIB:.c=.o)
 
 COVERAGE	=	$(MAIN_SRC:.c=.gcda)	\
 				$(MAIN_SRC:.c=.gcno)	\
 				$(TEST_SRC:.c=.gcda)	\
 				$(TEST_SRC:.c=.gcno)	\
-				$(LIB:.c=.gcda)	\
-				$(LIB:.c=.gcno)	\
 				$(SRC:.c=.gcda)	\
 				$(SRC:.c=.gcno)
 
-MAIN_SRC	=	src/solver/main.c
+MAIN_SRC	=	main.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
-CFLAGS	=	-I./include -Wextra -W -Wall -pedantic
+CFLAGS	=	-I../include -Wextra -W -Wall -pedantic
 
-TEST_SRC	=	tests/initialisation.c	\
-				tests/tests_lib.c
+TARGET	=	generator
+
+TEST_SRC	=	tests/initisation.c
 
 TEST_OBJ	=	$(TEST_SRC:.c=.o)
 
@@ -47,18 +38,23 @@ TEST_TARGET	=	unit_tests
 
 TEST_LFLAGS	=	-lcriterion
 
-all:	build ## Build the project
+all:	$(TARGET) ## Build the project
 
-build:
-	make -C generator
-	make -C solver
+$(TARGET):	build
+
+build:	$(OBJ)	$(MAIN_OBJ) ## Compile the project
+	@printf "\e[1;3;5;32m▀▄▀▄▀▄ Finished compiling sources ▄▀▄▀▄▀\e[0m\n"
+	@$(CC) $(CFLAGS) $(OBJ) $(MAIN_OBJ) -o $(TARGET)
+	@printf "[\e[1;34m-Link Obj-\e[0m] % 43s\n" $(OBJ) | tr ' ' '.'
+	@printf "[\e[1;34m-Link Main-\e[0m] % 43s\n" $(MAIN_OBJ) | tr ' ' '.'
+	@printf "\e[1;3;5;32m▀▄▀▄▀▄ Link all object ▄▀▄▀▄▀\e[0m\n"
 
 %.o:	%.c
 	@$(CC) $(LFLAGS) $(CFLAGS) -c $< -o $@
 	@printf "[\e[1;34m-Compiled-\e[0m] % 41s\n" $@ | tr ' ' '.'
 
 clean: ## Clean the useless file
-	@rm -f $(OBJ) $(MAIN_OBJ) $(LIB_OBJ) $(TEST_OBJ) $(COVERAGE)
+	@rm -f $(OBJ) $(MAIN_OBJ) $(TEST_OBJ) $(COVERAGE)
 
 fclean:	clean ## Clean the project
 	@rm -f $(TARGET) $(TEST_TARGET)
@@ -69,9 +65,9 @@ fclean:	clean ## Clean the project
 re:	fclean all ## Clean then compile
 
 tests_run: CFLAGS += --coverage ## Launch tests
-tests_run:	$(OBJ)	$(TEST_OBJ)	$(LIB_OBJ)
+tests_run:	$(OBJ)	$(TEST_OBJ)
 	@printf "\e[1;32mFinished compiling sources\e[0m\n"
-	@$(CC) $(CFLAGS) $(OBJ) $(TEST_OBJ) $(LIB_OBJ) -o $(TEST_TARGET) $(TEST_LFLAGS)
+	@$(CC) $(CFLAGS) $(OBJ) $(TEST_OBJ) -o $(TEST_TARGET) $(TEST_LFLAGS)
 	@printf "\e[1;3;5;32m▀▄▀▄▀▄ Tests the code ▄▀▄▀▄▀\e[0m\n"
 	@./$(TEST_TARGET)
 	@gcovr --exclude tests/
@@ -80,7 +76,7 @@ re_tests: fclean tests_run ## Clean then tests
 
 valgrind:	CFLAGS += -g3
 valgrind:	fclean	all ## Launch valgrind
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET) maps/map1
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(TARGET)
 
 help: ## Help for the Makefile
 	@cat $(MAKEFILE_LIST) | sed -En 's/^([a-zA-Z_-]+)\s*:.*##\s?(.*)/\1 "\2"/p' | xargs printf "\033[32m%-30s\033[0m %s\n"
