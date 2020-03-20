@@ -39,8 +39,11 @@ int my_strcmpp(char const *s1, char const *s2);
 
 char *my_len_str(char *str);
 
-//transform_character.c
+// transform_character.c
 int my_atoi(char *str);
 int my_strlen(char const *str);
+
+// my_strdup.c
+char *my_strdup(char *src);
 
 #endif
