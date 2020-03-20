@@ -2,7 +2,7 @@
 
 ## General informations
 Name : dante<br />
-Author : Mathias Ressort<br />Alexandre Descoin
+Author : Mathias Ressort<br />Alexandre Descoins
 
 ## Requirement Package
 * C
