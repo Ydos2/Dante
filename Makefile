@@ -12,12 +12,17 @@ LIB	=	lib/transform_character.c	\
 		lib/get_next_line.c	\
 		lib/str_to_array.c	\
 		lib/my_putarray.c	\
-		lib/my_strcpy.c
+		lib/my_strcpy.c		\
+		lib/my_strdup.c
 
-SRC	=	src/solver/help_page.c	\
-		src/solver/dante.c		\
-		src/solver/read_file.c	\
-		src/solver/initialise.c
+SRC	=	solver/src/help_page.c		\
+		solver/src/dante.c			\
+		solver/src/read_file.c		\
+		solver/src/initialise.c		\
+		solver/src/map.c			\
+		solver/src/tools_function.c	\
+		solver/src/closed_open.c	\
+		solver/src/pos.c
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -32,7 +37,7 @@ COVERAGE	=	$(MAIN_SRC:.c=.gcda)	\
 				$(SRC:.c=.gcda)	\
 				$(SRC:.c=.gcno)
 
-MAIN_SRC	=	src/solver/main.c
+MAIN_SRC	=	solver/src/main.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 

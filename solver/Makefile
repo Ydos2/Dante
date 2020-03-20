@@ -7,10 +7,14 @@
 
 CC	=	gcc
 
-SRC	=	dante.c	\
-		help_page.c		\
-		initialise.c \
-		read_file.c \
+SRC	=	src/dante.c				\
+		src/help_page.c			\
+		src/initialise.c 		\
+		src/map.c 				\
+		src/read_file.c 		\
+		src/tools_function.c 	\
+		src/pos.c 				\
+		src/closed_open.c 		\
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -21,7 +25,7 @@ COVERAGE	=	$(MAIN_SRC:.c=.gcda)	\
 				$(SRC:.c=.gcda)	\
 				$(SRC:.c=.gcno)
 
-MAIN_SRC	=	main.c
+MAIN_SRC	=	src/main.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
