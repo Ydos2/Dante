@@ -12,6 +12,20 @@
 #include <string.h>
 #include "generator.h"
 
+void put_maze(char **m, bool **path)
+{
+    int i = 0;
+
+    for (; m[i + 1] != NULL; i++) {
+        write(1, m[i], strlen(m[i]));
+        write(1, "\n", 1);
+        free(m[i]);
+        free(path[i]);
+    }
+    write(1, m[i], strlen(m[i]));
+
+}
+
 void generate_imperfect_maze(int x, int y)
 {
     char **m = create_empty_maze(x, y);
@@ -26,12 +40,7 @@ void generate_imperfect_maze(int x, int y)
         j = 0;
     }
     i = 0;
-    for (; m[i + 1] != NULL; i++) {
-        printf("%s\n", m[i]);
-        free(m[i]);
-        free(path[i]);
-    }
-    write(1, m[i], strlen(m[i]));
+    put_maze(m, path);
     free(m);
     free(path);
 }

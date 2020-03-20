@@ -36,7 +36,7 @@ bool check_openable(char **maze, bool **path, vector2_t *pos, vector2_t check)
         pos->x = check.x;
     }
     path[check.y][check.x] = true;
-    maze[check.y][check.x] = pass == 1 ? '*' : 'X'; 
+    maze[check.y][check.x] = pass == 1 ? '*' : 'X';
     return (pass == 1);
 }
 
@@ -56,7 +56,6 @@ bool open_next_tile(char **maze, bool **path, vector2_t *pos)
         if (chance <= odds &&
         check_openable(maze, path, pos, (vector2_t){pos->x - 1, pos->y}))
             return (true);
-        chance = rand() % 100;
         if (chance <= odds &&
         check_openable(maze, path, pos, (vector2_t){pos->x, pos->y - 1}))
             return (true);

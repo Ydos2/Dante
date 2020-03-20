@@ -20,7 +20,8 @@ void generate_perfect_maze(int x, int y)
 
     add_perfect_path(maze, path, x, y);
     for (; maze[i + 1] != NULL; i++) {
-        printf("%s\n", maze[i]);
+        write(1, maze[i], strlen(maze[i]));
+        write(1, "\n", 1);
         free(maze[i]);
         free(path[i]);
     }
