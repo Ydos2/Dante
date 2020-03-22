@@ -29,7 +29,7 @@ MAIN_SRC	=	src/main.c
 
 MAIN_OBJ	=	$(MAIN_SRC:.c=.o)
 
-CFLAGS	=	-I../include -Wextra -W -Wall -pedantic
+CFLAGS	=	-I../include -Wextra -W -Wall -pedantic -g3
 
 TARGET	=	solver
 

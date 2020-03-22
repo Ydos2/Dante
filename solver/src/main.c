@@ -33,8 +33,7 @@ int main(int ac, char **av)
     f = init_first(&map);
     if (f == NULL)
         return (1);
-    if (dante(&map, f) == 1)
-        return (1);
+    dante(&map, f);
     print_map(&map);
     free_struct(&map);
     return (0);

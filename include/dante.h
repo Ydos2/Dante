@@ -35,9 +35,9 @@ typedef struct s_map
 
 // dante.c
 void get_neighbours_pos(t_open *neighbor, int y, int x);
-t_open *lowest_h_cost(t_first *f);
 int set_neighbours(t_open *neighbor,
     t_map *map, t_first *f, t_open *actual);
+void map_loop(t_open *actual, t_map *map);
 int dante(t_map *map, t_first *f);
 
 // pos.c

@@ -15,23 +15,6 @@ void get_neighbours_pos(t_open *neighbor, int y, int x)
     neighbor->x = x;
 }
 
-int choose_neighbours(t_open *neighbor,
-    t_map *map, t_first *f, t_open *actual)
-{
-    int ret = 0;
-
-    if ((ret = is_it_in_open(f, neighbor->y, neighbor->x)) != 1) {
-        if (ret == -1)
-            return (1);
-        neighbor->closed = 0;
-        neighbor->h_cost = ((map->largeur - 1)- neighbor->x) * 10
-        + ((map->hauteur - 1) - neighbor->y) * 10;
-        neighbor->parent = actual;
-        if (add_neighbor_in_open(f, neighbor) == 1)
-            return (1);
-    }
-}
-
 int set_neighbours(t_open *neighbor,
     t_map *map, t_first *f, t_open *actual)
 {
@@ -43,7 +26,16 @@ int set_neighbours(t_open *neighbor,
         && (ret = is_it_closed(f, neighbor->y, neighbor->x)) != 1) {
         if (ret == -1)
             return (1);
-        return (choose_neighbours(neighbor, map, f, actual));
+        if ((ret = is_it_in_open(f, neighbor->y, neighbor->x)) != 1) {
+            if (ret == -1)
+                return (1);
+            neighbor->closed = 0;
+            neighbor->h_cost = ((map->largeur - 1)- neighbor->x) * 10
+            + ((map->hauteur - 1) - neighbor->y) * 10;
+            neighbor->parent = actual;
+            if (add_neighbor_in_open(f, neighbor) == 1)
+                return (1);
+        }
     }
     return (0);
 }
